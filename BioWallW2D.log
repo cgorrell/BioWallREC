@@ -1,0 +1,14 @@
+2015-01-30 12:11:49,945 :: exosite :: DEBUG :: fetching modbus parameters from database
+2015-01-30 12:11:49,945 :: exosite :: DEBUG :: getting CIK of device from database
+2015-01-30 12:11:49,945 :: exosite :: DEBUG :: getting modbus output addresses from database
+2015-01-30 12:11:49,945 :: exosite :: DEBUG :: attempting to reset alarm status on exosite
+2015-01-30 12:11:50,131 :: exosite :: INFO :: reset alarm status on exosite
+2015-01-30 12:11:50,131 :: exosite :: DEBUG :: attempting to connect to modbus device
+2015-01-30 12:11:50,132 :: exosite :: ERROR :: device not connected
+2015-01-30 12:11:50,132 :: exosite.Device_alarm :: ERROR :: alarm has been thrown: slave not connected
+2015-01-30 12:11:50,313 :: exosite :: DEBUG :: generating timers
+2015-01-30 12:11:50,364 :: exosite.Water_timer :: DEBUG :: starting new watering cycle
+2015-01-30 12:11:50,364 :: exosite.Data_manager :: DEBUG :: Starting new data cycle
+2015-01-30 12:11:50,364 :: exosite.Water_timer :: DEBUG :: fetching output timers from database
+2015-01-30 12:11:50,365 :: exosite.Data_manager :: DEBUG :: fetching data relay timer from database
+2015-01-30 12:11:50,365 :: exosite.Water_timer :: DEBUG :: Checking for leaks

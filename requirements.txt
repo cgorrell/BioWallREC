@@ -1,0 +1,4 @@
+modbus-tk==0.4
+pyonep==0.9.6
+pyserial==2.6
+supervisor==3.0b2
