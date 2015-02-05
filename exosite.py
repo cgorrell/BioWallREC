@@ -250,6 +250,7 @@ def Water_on():
 	con2 = lite.connect('pi.db')
 	Water_on_logger = logging.getLogger("exosite.Water_on")
 	Water_on_logger.debug("water on")
+	global Fill_mode
 	try:
 		with con2:
 			Water_on_logger.debug("Checking Water level")
@@ -274,7 +275,7 @@ def Water_on():
 			Fill_mode = False
 			Water_on_logger.debug("Turning on Pump 1")
 			wall.execute(1, cst.WRITE_SINGLE_REGISTER, Pump_address, output_value=1)
-			Fertigation
+			Fertigation()
 	except modbus_tk.modbus.ModbusError, e:
 		Water_on_logger.error("%s- Code=%d", e, e.get_exception_code())
 	except modbus_tk.modbus.ModbusInvalidResponseError, e:

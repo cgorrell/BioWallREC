@@ -15,7 +15,7 @@ provision = Provision('m2.exosite.com', https=True, port=443,  manage_by_cik=Fal
 
 
 def Wall_config():       
-    print "What would you like to configure? (1=Modbus, 2=Gateway, 3=Sensors, 4=Outputs, 5=Timers, 6=Setpoints, 0=Exit)"
+    print "What would you like to configure? \n1=Modbus \n 2=Gateway \n 3=Sensors \n 4=Outputs \n 5=Timers \n 6=Setpoints \n 0=Exit"
     selection = int(raw_input(prompt))
     if selection == 1:
         Modbus_config()
@@ -34,25 +34,25 @@ def Modbus_config():
     while True:
         print "We will begin with Preparing the Modbus Device Connection. Please respond to every prompt. \n"
 
-        print "What is the Modbus Device Address (0-255?)"
+        print "What is the Modbus Device Address (0-255?) [T34A0 = 01]"
         Modbus_address = int(raw_input(prompt))
 
         print "What is the Modbus Device Baudrate?  Usually 9600 or 19200."
         Baudrate = int(raw_input(prompt))
 
-        print "What is the register bit length for your input registers? (usually 8 or 12)"
+        print "What is the register bit length for your input registers? (usually 8 or *12)"
         Register_bit_length = int(raw_input(prompt))
 
-        print "What is the Starting INPUT register address on your modbus device?"
+        print "What is the Starting INPUT register address on your modbus device? [T34A0 = 190]"
         Starting_input = int(raw_input(prompt))
 
-        print "How many consecutive inputs would you like to read?"
+        print "How many consecutive inputs would you like to read? [T34A0 = 10]"
         Qty_inputs = int(raw_input(prompt))
 
-        print "What is the Starting OUPUT register address on your modbus device?"
+        print "What is the Starting OUPUT register address on your modbus device? [T34A0 = 100]"
         Starting_ouput = int(raw_input(prompt))
 
-        print "How many consecutive outputs would you like to read?"
+        print "How many consecutive outputs would you like to read? [T34A0 = 8]"
         Qty_outputs = int(raw_input(prompt))
 
         print "Is everything correct (y/n)? \n Modbus_address = %r \n Baudrate = %r \n Register_bit_length = %r \n Starting_input = %r \n Qty_inputs = %r \n Starting_ouput = %r \n Qty_outputs = %r \n" % (Modbus_address, Baudrate,  Register_bit_length, Starting_input, Qty_inputs, Starting_ouput, Qty_outputs)
@@ -74,7 +74,7 @@ def Gateway_config():
     while True:
         print "We will begin with Preparing the Gateway Device Connection. Please respond to every prompt. \n"
 
-        print "What is the Alias of your gateway? (must be a Unique wall name)"
+        print "What is the Alias of your gateway? (must be a Unique wall name should match Exosite Alias)"
         Device_alias = raw_input(prompt)
         
         print "What is your Device Serial Number? (from exosite)"
@@ -108,7 +108,7 @@ def Sensors_config():
         print "What is the slope for your PH Voltage conversion?"
         PH_slope = float(raw_input(prompt))
 
-        print "What is the intercept for your PH Voltage conversion? (Future application put 1 for now)"
+        print "What is the intercept for your PH Voltage conversion?"
         PH_intercept = float(raw_input(prompt))
 
         print "What is the modbus register address of your EC sensor?"
@@ -120,7 +120,7 @@ def Sensors_config():
         print "What is the slope for your EC Voltage conversion?"
         EC_slope = float(raw_input(prompt))
 
-        print "What is the intercept for your EC Voltage conversion? (Future application put 1 for now)"
+        print "What is the intercept for your EC Voltage conversion?"
         EC_intercept = float(raw_input(prompt))
 
         print "What is the modbus register address of your Pressure sensor?"
@@ -132,7 +132,7 @@ def Sensors_config():
         print "What is the slope for your Pressure Voltage conversion?"
         Pressure_slope = float(raw_input(prompt))
 
-        print "What is the intercept for your Pressure Voltage conversion? (Future application put 1 for now)"
+        print "What is the intercept for your Pressure Voltage conversion?"
         Pressure_intercept = float(raw_input(prompt))
 
         print "What is the modbus register address of your Flow sensor?"
@@ -144,7 +144,7 @@ def Sensors_config():
         print "What is the slope for your Flow Voltage conversion?"
         Flow_slope = float(raw_input(prompt))
 
-        print "What is the intercept for your Flow Voltage conversion? (Future application put 1 for now)"
+        print "What is the intercept for your Flow Voltage conversion?"
         Flow_intercept = float(raw_input(prompt))
 
         print "What is the modbus register address of your Level sensor?"
@@ -153,11 +153,11 @@ def Sensors_config():
         print "What is Dataport RID of your Level sensor? (Future application put 1 for now)"
         Level_RID = raw_input(prompt)
 
-        print "What is the slope for your Level Voltage conversion?"
-        Level_slope = float(raw_input(prompt))
+        print "What is the length of your Wema Level sensor (in inches)?"
+        Level_height = float(raw_input(prompt))
 
-        print "What is the intercept for your Level Voltage conversion? (Future application put 1 for now)"
-        Level_intercept = float(raw_input(prompt))
+        print "What is the offset of the sensor from the bottom of the tank (in inches)?"
+        Level_offset = float(raw_input(prompt))
 
         print "What is the modbus register address of your Leak sensor?"
         Leak_address = float(raw_input(prompt))
@@ -168,11 +168,14 @@ def Sensors_config():
         print "What is the slope for your Leak Voltage conversion?"
         Leak_slope = int(raw_input(prompt))
 
-        print "What is the intercept for your Leak Voltage conversion? (Future application put 1 for now)"
+        print "What is the intercept for your Leak Voltage conversion?"
         Leak_intercept = raw_input(prompt)
 
-        print "Is everything correct (y/n)? \n PH_address = %r \n PH_RID = %r \n PH_slope = %r \n PH_intercept = %r \n EC_address = %r \n EC_RID = %r \n EC_slope = %r \n EC_intercept = %r \n Pressure_address = %r \n Pressure_RID = %r \n Pressure_slope = %r \n Pressure_intercept = %r \n Flow_address = %r \n Flow_RID = %r \n Flow_slope = %r \n Flow_intercept = %r \n Level_address = %r \n Level_RID = %r \n Level_slope = %r \n Level_intercept = %r \n Leak_address = %r \n Leak_RID = %r \n  Leak_slope = %r \n Leak_intercept = %r \n " % (PH_address, PH_RID, PH_slope, PH_intercept, EC_address, EC_RID, EC_slope, EC_intercept, Pressure_address, Pressure_RID, Pressure_slope, Pressure_intercept, Flow_address, Flow_RID, Flow_slope, Flow_intercept, Level_address, Level_RID, Level_slope, Level_intercept, Leak_address, Leak_RID, Leak_slope, Leak_intercept)
+        print "Is everything correct (y/n)? \n PH_address = %r \n PH_RID = %r \n PH_slope = %r \n PH_intercept = %r \n EC_address = %r \n EC_RID = %r \n EC_slope = %r \n EC_intercept = %r \n Pressure_address = %r \n Pressure_RID = %r \n Pressure_slope = %r \n Pressure_intercept = %r \n Flow_address = %r \n Flow_RID = %r \n Flow_slope = %r \n Flow_intercept = %r \n Level_address = %r \n Level_RID = %r \n Level_height = %r \n Level_offset = %r \n Leak_address = %r \n Leak_RID = %r \n  Leak_slope = %r \n Leak_intercept = %r \n " % (PH_address, PH_RID, PH_slope, PH_intercept, EC_address, EC_RID, EC_slope, EC_intercept, Pressure_address, Pressure_RID, Pressure_slope, Pressure_intercept, Flow_address, Flow_RID, Flow_slope, Flow_intercept, Level_address, Level_RID, Level_height, Level_offset, Leak_address, Leak_RID, Leak_slope, Leak_intercept)
         if raw_input(prompt) == 'y':
+            
+            Level_slope = -Level_height/84.813
+            Level_intercept = 0 - Level_slope*98.304 + Level_offset
             with con:
                 cur = con.cursor()
                 cur.execute("INSERT INTO Sensors(Alias, Address, RID, Slope, Intercept) VALUES ('PH', ?, ?, ?, ?);", (PH_address, PH_RID, PH_slope, PH_intercept, ))
@@ -233,10 +236,10 @@ def Timers_config():
         print "What is the total cycle time for your circulating pump?"
         Pump_cycle = float(raw_input(prompt))
 
-        print "What is the run time for your circulating pump per cycle."
+        print "What is the run time for your circulating pump per cycle. (should be less than last response)"
         Pump_timer = float(raw_input(prompt))
 
-        print "What is the per dosing duration for the fertigator?"
+        print "What is the per dosing duration for the fertigator? (should be less than last reponse)"
         Fertigator_timer = float(raw_input(prompt))
 
         print "What is delay between data transmissions to exosite? (read/write frequency should be greater than 15 seconds)"
@@ -259,19 +262,19 @@ def Setpoints_config():
     while True:
         print "We will begin with Preparing the Setpoints for your device. \n"
 
-        print "What is the high water setpoint for your recirculating system?"
+        print "What is the high water setpoint for your recirculating system? (in inches)"
         Water_high_setpoint = float(raw_input(prompt))
 
-        print "What is the low water setpoint for your recirculating system"
+        print "What is the low water setpoint for your recirculating system? (in inches)"
         Water_low_setpoint = float(raw_input(prompt))
 
-        print "What is the high EC setpoint for your recirculating system?"
+        print "What is the high EC setpoint for your recirculating system? (in PPM)"
         EC_high_setpoint = float(raw_input(prompt))
 
-        print "What is the low EC setpoint for your recirculating system"
+        print "What is the low EC setpoint for your recirculating system? (in PPM)"
         EC_low_setpoint = float(raw_input(prompt))
 
-        print "Is everything correct (y/n)? \n Water_high_setpoint= %r \n Water_low_setpoint= %r \n EC_high_setpoint= %r \n EC_low_setpoint= %r \n" % (Water_high_setpoint, Water_low_setpoint, EC_high_setpoint, EC_low_setpoint)
+        print "Is everything correct (y/n)? \n Water_high_setpoint= %r inches \n Water_low_setpoint= %r inches \n EC_high_setpoint= %r \n EC_low_setpoint= %r \n" % (Water_high_setpoint, Water_low_setpoint, EC_high_setpoint, EC_low_setpoint)
         if raw_input(prompt) == 'y':
             with con:
                 Manual_fill = 0
@@ -401,7 +404,7 @@ def Startup():
 				Setpoints_check = 0
 
 		if Modbus_check != 1 or Gateway_check != 1 or Sensors_check != 1 or Outputs_check != 1 or Timers_check != 1 or Setpoints_check != 1:# or GPIO.input(23) == 1:
-			print "Modbus config = %r Gateway config = %r Sensors config = %r Outputs config = %r Timers config = %r Setpoints config = %r" % (Modbus_check, Gateway_check, Sensors_check, Outputs_check, Timers_check, Setpoints_check)
+			print "\nModbus config = %r \n Gateway config = %r \n Sensors config = %r \n Outputs config = %r \n Timers config = %r \n Setpoints config = %r" % (Modbus_check, Gateway_check, Sensors_check, Outputs_check, Timers_check, Setpoints_check)
 			raw_input("Press Enter to continue...")
 			Wall_config()
 		else:

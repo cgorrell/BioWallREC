@@ -1,0 +1,26 @@
+2015-02-05 13:23:30,052 :: exosite.setup :: INFO :: Sensor table updated with: 
+ PH_address = 190 
+ PH_RID = '1' 
+ PH_slope = 0.0 
+ PH_intercept = 1.0 
+ EC_address = 191 
+ EC_RID = '1' 
+ EC_slope = 1.0 
+ EC_intercept = 0.0 
+ Pressure_address = 198 
+ Pressure_RID = '1' 
+ Pressure_slope = 1.0 
+ Pressure_intercept = 0.0 
+ Flow_address = 193 
+ Flow_RID = '1' 
+ Flow_slope = 1.0 
+ Flow_intercept = 0.0 
+ Level_address = 194 
+ Level_RID = '1' 
+ Level_slope = -0.2240222607383302 
+ Level_intercept = 24.022284319620812 
+ Leak_address = 195.0 
+ Leak_RID = 1.0 
+  Leak_slope = 1 
+ Leak_intercept = '0' 
+ 
