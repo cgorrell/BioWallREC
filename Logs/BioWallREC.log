@@ -1,0 +1,53 @@
+2015-02-23 14:30:41,994 :: exosite :: ERROR :: failed to reset alarm because {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:30:41,995 :: exosite :: INFO :: connected to modbus device
+2015-02-23 14:30:50,151 :: exosite.Water_timer :: ERROR :: Response length is invalid 0
+2015-02-23 14:30:57,104 :: exosite.Sensor_delivery :: INFO :: [[{'alias': 'PH'}, 0.15925], [{'alias': 'EC'}, 0.0], [{'alias': 'Pressure'}, -8.0081787109375], [{'alias': 'Flow'}, 0.0341796875], [{'alias': 'Leak'}, 9997.55859375], [{'alias': 'Level'}, 54.8235]]
+2015-02-23 14:31:18,912 :: exosite.Water_timer :: ERROR :: Response length is invalid 0
+2015-02-23 14:31:27,294 :: exosite.Sensor_delivery :: ERROR :: Exosite error: {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:31:27,331 :: exosite.Output_delivery :: INFO :: [0, 0, 0, 0, 0, 0, 0, 0]
+2015-02-23 14:31:27,332 :: exosite.Output_delivery :: INFO :: [[{'alias': 'Solenoid'}, 0], [{'alias': 'Fertigator'}, 0], [{'alias': 'Pump'}, 0], [{'alias': 'Fill'}, 0]]
+2015-02-23 14:32:03,358 :: exosite.Water_timer :: WARNING :: Leak detected!
+2015-02-23 14:32:03,359 :: exosite.Device_alarm :: ERROR :: alarm has been thrown: Leak detected!
+2015-02-23 14:32:08,582 :: exosite.Device_alarm :: WARNING :: failed to update exosite alarm: {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:32:11,584 :: exosite.Water_timer :: ERROR :: Device Communication Error
+2015-02-23 14:32:11,584 :: exosite.Device_alarm :: ERROR :: alarm has been thrown: Device Communication Error
+2015-02-23 14:32:11,767 :: exosite.Device_alarm :: WARNING :: failed to update exosite alarm: {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:32:11,896 :: exosite.Water_timer :: WARNING :: Leak detected!
+2015-02-23 14:32:11,896 :: exosite.Device_alarm :: ERROR :: alarm has been thrown: Leak detected!
+2015-02-23 14:32:12,087 :: exosite.Device_alarm :: WARNING :: failed to update exosite alarm: {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:32:15,090 :: exosite.Water_timer :: ERROR :: Device Communication Error
+2015-02-23 14:32:15,091 :: exosite.Device_alarm :: ERROR :: alarm has been thrown: Device Communication Error
+2015-02-23 14:32:15,276 :: exosite.Device_alarm :: WARNING :: failed to update exosite alarm: {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:32:15,354 :: exosite.Water_timer :: WARNING :: Leak detected!
+2015-02-23 14:32:15,355 :: exosite.Device_alarm :: ERROR :: alarm has been thrown: Leak detected!
+2015-02-23 14:32:15,541 :: exosite.Device_alarm :: WARNING :: failed to update exosite alarm: {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:32:18,544 :: exosite.Water_timer :: ERROR :: Device Communication Error
+2015-02-23 14:32:18,545 :: exosite.Device_alarm :: ERROR :: alarm has been thrown: Device Communication Error
+2015-02-23 14:32:18,729 :: exosite.Device_alarm :: WARNING :: failed to update exosite alarm: {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:32:18,808 :: exosite.Water_timer :: WARNING :: Leak detected!
+2015-02-23 14:32:18,808 :: exosite.Device_alarm :: ERROR :: alarm has been thrown: Leak detected!
+2015-02-23 14:32:18,993 :: exosite.Device_alarm :: WARNING :: failed to update exosite alarm: {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:33:54,827 :: exosite :: ERROR :: failed to reset alarm because {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:33:54,829 :: exosite :: INFO :: connected to modbus device
+2015-02-23 14:34:09,943 :: exosite.Sensor_delivery :: INFO :: [[{'alias': 'PH'}, 0.15925], [{'alias': 'EC'}, 62.5], [{'alias': 'Pressure'}, -8.34783935546875], [{'alias': 'Flow'}, 0.0341796875], [{'alias': 'Leak'}, 9960.9375], [{'alias': 'Level'}, 52.5735]]
+2015-02-23 14:35:59,011 :: exosite :: ERROR :: failed to reset alarm because {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:35:59,013 :: exosite :: INFO :: connected to modbus device
+2015-02-23 14:37:00,934 :: exosite :: ERROR :: failed to reset alarm because {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:37:00,935 :: exosite :: INFO :: connected to modbus device
+2015-02-23 14:38:55,491 :: exosite :: ERROR :: failed to reset alarm because {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:38:55,493 :: exosite :: INFO :: connected to modbus device
+2015-02-23 14:39:39,931 :: exosite :: ERROR :: failed to reset alarm because {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:39:39,932 :: exosite :: INFO :: connected to modbus device
+2015-02-23 14:39:53,899 :: exosite :: ERROR :: failed to reset alarm because {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:39:53,900 :: exosite :: INFO :: connected to modbus device
+2015-02-23 14:40:02,013 :: exosite.Water_timer :: ERROR :: Response length is invalid 0
+2015-02-23 14:46:28,148 :: exosite :: ERROR :: failed to reset alarm because {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:46:28,149 :: exosite :: INFO :: connected to modbus device
+2015-02-23 14:46:43,288 :: exosite.Sensor_delivery :: INFO :: [[{'alias': 'PH'}, 0.15925], [{'alias': 'EC'}, 0.0], [{'alias': 'Pressure'}, -8.0081787109375], [{'alias': 'Flow'}, 0.0], [{'alias': 'Leak'}, 9997.55859375], [{'alias': 'Level'}, 12.1555859375]]
+2015-02-23 14:47:13,501 :: exosite.Sensor_delivery :: ERROR :: Exosite error: {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:47:13,538 :: exosite.Output_delivery :: INFO :: [1, 0, 0, 0, 0, 0, 0, 0]
+2015-02-23 14:47:13,539 :: exosite.Output_delivery :: INFO :: [[{'alias': 'Solenoid'}, 1], [{'alias': 'Fertigator'}, 0], [{'alias': 'Pump'}, 0], [{'alias': 'Fill'}, 0]]
+2015-02-23 14:49:26,828 :: exosite :: ERROR :: failed to reset alarm because {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:49:26,829 :: exosite :: INFO :: connected to modbus device
+2015-02-23 14:49:40,444 :: exosite :: ERROR :: failed to reset alarm because {u'message': u'Authorization failed', u'code': 401}
+2015-02-23 14:49:40,445 :: exosite :: INFO :: connected to modbus device

@@ -97,19 +97,19 @@ def Sensor_delivery():
 		Sensor_delivery_logger.debug(Reader)
 		Wall_data = []
 		for data in Reader:    
-			Wall_data += [round(data*10.00/(2**bits), 3)]
+			Wall_data += [round(data, 3)]
 
-		Sensor_delivery_logger.debug("Wall sensor values: " + str(Wall_data))
+		Sensor_delivery_logger.debug("Wall sensor ADC values: " + str(Wall_data))
 		vals_to_write = []
 		Sensor_delivery_logger.debug("Getting alias for sensors")
 		with con3:
 			cur = con3.cursor()
-			cur.execute("SELECT Alias, Address FROM Sensors")
+			cur.execute("SELECT Alias, Address, DACN, Slope, Intercept FROM Sensors")
 			while True:
 				row = cur.fetchone()
 				if row == None:
 					break
-				vals_to_write += [[{'alias':row[0].encode('ascii', 'ignore')}, Wall_data[row[1]-Starting_input]]]
+				vals_to_write += [[{'alias':row[0].encode('ascii', 'ignore')}, Wall_data[row[1]-Starting_input]*row[2]/2**bits*row[3]+row[4]]]
 		Sensor_delivery_logger.info(vals_to_write)
 		Sensor_delivery_logger.debug("Submitting sensor data to exosite")
 		o.writegroup(
@@ -255,15 +255,16 @@ def Water_on():
 		with con2:
 			Water_on_logger.debug("Checking Water level")
 			cur = con2.cursor()
-			Level_slope = cur.execute("SELECT Slope FROM Sensors WHERE Alias = ?;", ('Level', )).fetchone()[0]
-			Level_intercept = cur.execute("SELECT Intercept FROM Sensors WHERE Alias = ?;", ('Level', )).fetchone()[0]
+			Level_param = cur.execute("SELECT DACN, Slope, Intercept FROM Sensors WHERE Alias = ?;", ('Level', )).fetchone()
 			Water_high_setpoint = cur.execute("SELECT Value FROM Setpoints WHERE Name = ?;", ('Water_high_setpoint', )).fetchone()[0]
 			Water_low_setpoint = cur.execute("SELECT Value FROM Setpoints WHERE Name = ?;", ('Water_low_setpoint', )).fetchone()[0]
-		if wall.execute(1, cst.READ_HOLDING_REGISTERS, Level_address, 1)[0] * Level_slope + Level_intercept < Water_low_setpoint:
+		Water_level = wall.execute(1, cst.READ_HOLDING_REGISTERS, Level_address, 1)[0] * Level_param[0] / 2**bits * Level_param[1] + Level_param[2]
+		print "ADC:  ", wall.execute(1, cst.READ_HOLDING_REGISTERS, Level_address, 1)[0], "   param", Level_param, "   water level:", Water_level
+		if Water_level < Water_low_setpoint:
 			Fill_mode = True
 			Water_on_logger.debug("Turning on Water 0")
 			wall.execute(1, cst.WRITE_SINGLE_REGISTER, Supply_address, output_value=1)
-		elif wall.execute(1, cst.READ_HOLDING_REGISTERS, Level_address, 1)[0] * Level_slope + Level_intercept  > Water_low_setpoint and wall.execute(1, cst.READ_HOLDING_REGISTERS, Level_address, 1)[0] * Level_slope + Level_intercept  < Water_high_setpoint:
+		elif Water_level  > Water_low_setpoint and Water_level < Water_high_setpoint:
 			if Fill_mode == True:
 				Water_on_logger.debug("Turning on Water 1")
 				wall.execute(1, cst.WRITE_SINGLE_REGISTER, Supply_address, output_value=1)
@@ -310,17 +311,17 @@ def Fertigation():
 		with con2:
 			cur = con2.cursor()
 			Dose_period = cur.execute("SELECT Length FROM Timers WHERE Name = ?;", ('Fertigator_timer', )).fetchone()[0]
-			EC_slope = cur.execute("SELECT Slope FROM Sensors WHERE Alias = ?;", ('EC', )).fetchone()[0]
-			EC_intercept = cur.execute("SELECT Intercept FROM Sensors WHERE Alias = ?;", ('EC', )).fetchone()[0]
+			EC_param = cur.execute("SELECT DACN, Slope, Intercept FROM Sensors WHERE Alias = ?;", ('EC', )).fetchone()
 			EC_low_setpoint = cur.execute("SELECT Value FROM Setpoints WHERE Name = ?;", ('EC_low_setpoint', )).fetchone()[0]
 			EC_high_setpoint = cur.execute("SELECT Value FROM Setpoints WHERE Name = ?;", ('EC_high_setpoint', )).fetchone()[0]
-		if wall.execute(1, cst.READ_HOLDING_REGISTERS, EC_address, 1)[0] * EC_slope +EC_intercept < EC_low_setpoint:
+			EC_level = wall.execute(1, cst.READ_HOLDING_REGISTERS, EC_address, 1)[0] * EC_param[0] / 2**bits * EC_param[1] +EC_param[2]
+		if  EC_level < EC_low_setpoint:
 			Fertigation_logger.debug("Low EC Running fertigation cycle")
 			wall.execute(1, cst.WRITE_SINGLE_REGISTER, Fertigator_address, output_value=1)
 			time.sleep(Dose_period)
 			wall.execute(1, cst.WRITE_SINGLE_REGISTER, Fertigator_address, output_value=0)
 			Fertigation_logger.debug("Terminating fertigation cycle")
-		#elif wall.execute(1, cst.READ_HOLDING_REGISTERS, EC_address, 1)[0] > EC_high_setpoint:
+		#elif EC_level > EC_high_setpoint:
 		#	Fertigation_logger.debug("High EC Running Dilution cycle")
 		#	wall.execute(1, cst.WRITE_SINGLE_REGISTER, Fill_address, output_value=1)
 		#	time.sleep(Dose_period)

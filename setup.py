@@ -102,8 +102,8 @@ def Sensors_config():
         print "What is the modbus register address of your PH sensor?"
         PH_address = int(raw_input(prompt))
 
-        print "What is Dataport RID of your PH sensor ? (Future application put 1 for now)"
-        PH_RID = raw_input(prompt)
+        print "What is the Digital to Analog Conversion Numerator of your PH sensor ? (10)"
+        PH_DACN = float(raw_input(prompt))
 
         print "What is the slope for your PH Voltage conversion?"
         PH_slope = float(raw_input(prompt))
@@ -114,8 +114,8 @@ def Sensors_config():
         print "What is the modbus register address of your EC sensor?"
         EC_address = int(raw_input(prompt))
 
-        print "What is Dataport RID of your EC sensor? (Future application put 1 for now)"
-        EC_RID = raw_input(prompt)
+        print "What is the Digital to Analog Conversion Numerator of your EC sensor? (10)"
+        EC_DACN = float(raw_input(prompt))
 
         print "What is the slope for your EC Voltage conversion?"
         EC_slope = float(raw_input(prompt))
@@ -126,8 +126,8 @@ def Sensors_config():
         print "What is the modbus register address of your Pressure sensor?"
         Pressure_address = int(raw_input(prompt))
 
-        print "What is Dataport RID of your Pressure sensor? (Future application put 1 for now)"
-        Pressure_RID = raw_input(prompt)
+        print "What is the Digital to Analog Conversion Numerator of your Pressure sensor? (10)"
+        Pressure_DACN = float(raw_input(prompt))
 
         print "What is the slope for your Pressure Voltage conversion?"
         Pressure_slope = float(raw_input(prompt))
@@ -138,8 +138,8 @@ def Sensors_config():
         print "What is the modbus register address of your Flow sensor?"
         Flow_address = int(raw_input(prompt))
 
-        print "What is Dataport RID of your Flow sensor? (Future application put 1 for now)"
-        Flow_RID = raw_input(prompt)
+        print "What is the Digital to Analog Conversion Numerator of your Flow sensor? (10)"
+        Flow_DACN = float(raw_input(prompt))
 
         print "What is the slope for your Flow Voltage conversion?"
         Flow_slope = float(raw_input(prompt))
@@ -150,8 +150,8 @@ def Sensors_config():
         print "What is the modbus register address of your Level sensor?"
         Level_address = int(raw_input(prompt))
 
-        print "What is Dataport RID of your Level sensor? (Future application put 1 for now)"
-        Level_RID = raw_input(prompt)
+        print "What is the Digital to Analog Conversion Numerator of your Level sensor? (10000)"
+        Level_DACN = float(raw_input(prompt))
 
         print "What is the length of your Wema Level sensor (in inches)?"
         Level_height = float(raw_input(prompt))
@@ -162,8 +162,8 @@ def Sensors_config():
         print "What is the modbus register address of your Leak sensor?"
         Leak_address = float(raw_input(prompt))
 
-        print "What is Dataport RID of your Leak sensor? (Future application put 1 for now)"
-        Leak_RID = float(raw_input(prompt))
+        print "What is the Digital to Analog Conversion Numerator of your Leak sensor? (10000)"
+        Leak_DACN = float(raw_input(prompt))
 
         print "What is the slope for your Leak Voltage conversion?"
         Leak_slope = int(raw_input(prompt))
@@ -171,20 +171,20 @@ def Sensors_config():
         print "What is the intercept for your Leak Voltage conversion?"
         Leak_intercept = raw_input(prompt)
 
-        print "Is everything correct (y/n)? \n PH_address = %r \n PH_RID = %r \n PH_slope = %r \n PH_intercept = %r \n EC_address = %r \n EC_RID = %r \n EC_slope = %r \n EC_intercept = %r \n Pressure_address = %r \n Pressure_RID = %r \n Pressure_slope = %r \n Pressure_intercept = %r \n Flow_address = %r \n Flow_RID = %r \n Flow_slope = %r \n Flow_intercept = %r \n Level_address = %r \n Level_RID = %r \n Level_height = %r \n Level_offset = %r \n Leak_address = %r \n Leak_RID = %r \n  Leak_slope = %r \n Leak_intercept = %r \n " % (PH_address, PH_RID, PH_slope, PH_intercept, EC_address, EC_RID, EC_slope, EC_intercept, Pressure_address, Pressure_RID, Pressure_slope, Pressure_intercept, Flow_address, Flow_RID, Flow_slope, Flow_intercept, Level_address, Level_RID, Level_height, Level_offset, Leak_address, Leak_RID, Leak_slope, Leak_intercept)
+        print "Is everything correct (y/n)? \n PH_address = %r \n PH_DACN = %r \n PH_slope = %r \n PH_intercept = %r \n EC_address = %r \n EC_DACN = %r \n EC_slope = %r \n EC_intercept = %r \n Pressure_address = %r \n Pressure_DACN = %r \n Pressure_slope = %r \n Pressure_intercept = %r \n Flow_address = %r \n Flow_DACN = %r \n Flow_slope = %r \n Flow_intercept = %r \n Level_address = %r \n Level_DACN = %r \n Level_height = %r \n Level_offset = %r \n Leak_address = %r \n Leak_DACN = %r \n  Leak_slope = %r \n Leak_intercept = %r \n " % (PH_address, PH_DACN, PH_slope, PH_intercept, EC_address, EC_DACN, EC_slope, EC_intercept, Pressure_address, Pressure_DACN, Pressure_slope, Pressure_intercept, Flow_address, Flow_DACN, Flow_slope, Flow_intercept, Level_address, Level_DACN, Level_height, Level_offset, Leak_address, Leak_DACN, Leak_slope, Leak_intercept)
         if raw_input(prompt) == 'y':
             
-            Level_slope = -Level_height/84.813
-            Level_intercept = 0 - Level_slope*98.304 + Level_offset
+            Level_slope = -Level_height/(240-33)
+            Level_intercept = 0 - Level_slope*240 + Level_offset
             with con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO Sensors(Alias, Address, RID, Slope, Intercept) VALUES ('PH', ?, ?, ?, ?);", (PH_address, PH_RID, PH_slope, PH_intercept, ))
-                cur.execute("INSERT INTO Sensors(Alias, Address, RID, Slope, Intercept) VALUES ('EC', ?, ?, ?, ?);", (EC_address, EC_RID, EC_slope, EC_intercept,  ))
-                cur.execute("INSERT INTO Sensors(Alias, Address, RID, Slope, Intercept) VALUES ('Pressure', ?, ?, ?, ?);", (Pressure_address, Pressure_RID, Pressure_slope, Pressure_intercept,  ))
-                cur.execute("INSERT INTO Sensors(Alias, Address, RID, Slope, Intercept) VALUES ('Flow', ?, ?, ?, ?);", (Flow_address, Flow_RID, Flow_slope, Flow_intercept,  ))
-                cur.execute("INSERT INTO Sensors(Alias, Address, RID, Slope, Intercept) VALUES ('Leak', ?, ?, ?, ?);", (Leak_address, Leak_RID, Leak_slope, Leak_intercept,  ))
-                cur.execute("INSERT INTO Sensors(Alias, Address, RID, Slope, Intercept) VALUES ('Level', ?, ?, ?, ?);", (Level_address, Level_RID, Level_slope, Level_intercept,  ))
-            Setup_logger.info("Sensor table updated with: \n PH_address = %r \n PH_RID = %r \n PH_slope = %r \n PH_intercept = %r \n EC_address = %r \n EC_RID = %r \n EC_slope = %r \n EC_intercept = %r \n Pressure_address = %r \n Pressure_RID = %r \n Pressure_slope = %r \n Pressure_intercept = %r \n Flow_address = %r \n Flow_RID = %r \n Flow_slope = %r \n Flow_intercept = %r \n Level_address = %r \n Level_RID = %r \n Level_slope = %r \n Level_intercept = %r \n Leak_address = %r \n Leak_RID = %r \n  Leak_slope = %r \n Leak_intercept = %r \n " % (PH_address, PH_RID, PH_slope, PH_intercept, EC_address, EC_RID, EC_slope, EC_intercept, Pressure_address, Pressure_RID, Pressure_slope, Pressure_intercept, Flow_address, Flow_RID, Flow_slope, Flow_intercept, Level_address, Level_RID, Level_slope, Level_intercept, Leak_address, Leak_RID, Leak_slope, Leak_intercept))
+                cur.execute("INSERT INTO Sensors(Alias, Address, DACN, Slope, Intercept) VALUES ('PH', ?, ?, ?, ?);", (PH_address, PH_DACN, PH_slope, PH_intercept, ))
+                cur.execute("INSERT INTO Sensors(Alias, Address, DACN, Slope, Intercept) VALUES ('EC', ?, ?, ?, ?);", (EC_address, EC_DACN, EC_slope, EC_intercept,  ))
+                cur.execute("INSERT INTO Sensors(Alias, Address, DACN, Slope, Intercept) VALUES ('Pressure', ?, ?, ?, ?);", (Pressure_address, Pressure_DACN, Pressure_slope, Pressure_intercept,  ))
+                cur.execute("INSERT INTO Sensors(Alias, Address, DACN, Slope, Intercept) VALUES ('Flow', ?, ?, ?, ?);", (Flow_address, Flow_DACN, Flow_slope, Flow_intercept,  ))
+                cur.execute("INSERT INTO Sensors(Alias, Address, DACN, Slope, Intercept) VALUES ('Leak', ?, ?, ?, ?);", (Leak_address, Leak_DACN, Leak_slope, Leak_intercept,  ))
+                cur.execute("INSERT INTO Sensors(Alias, Address, DACN, Slope, Intercept) VALUES ('Level', ?, ?, ?, ?);", (Level_address, Level_DACN, Level_slope, Level_intercept,  ))
+            Setup_logger.info("Sensor table updated with: \n PH_address = %r \n PH_DACN = %r \n PH_slope = %r \n PH_intercept = %r \n EC_address = %r \n EC_DACN = %r \n EC_slope = %r \n EC_intercept = %r \n Pressure_address = %r \n Pressure_DACN = %r \n Pressure_slope = %r \n Pressure_intercept = %r \n Flow_address = %r \n Flow_DACN = %r \n Flow_slope = %r \n Flow_intercept = %r \n Level_address = %r \n Level_DACN = %r \n Level_slope = %r \n Level_intercept = %r \n Leak_address = %r \n Leak_DACN = %r \n  Leak_slope = %r \n Leak_intercept = %r \n " % (PH_address, PH_DACN, PH_slope, PH_intercept, EC_address, EC_DACN, EC_slope, EC_intercept, Pressure_address, Pressure_DACN, Pressure_slope, Pressure_intercept, Flow_address, Flow_DACN, Flow_slope, Flow_intercept, Level_address, Level_DACN, Level_slope, Level_intercept, Leak_address, Leak_DACN, Leak_slope, Leak_intercept))
             break
         print "Let's try again."
           
@@ -195,37 +195,37 @@ def Outputs_config():
         print "What is the modbus register address of your make up water solenoid?"
         Solenoid_address = int(raw_input(prompt))
 
-        print "What is Dataport RID of your make up water solenoid? (Future application put 1 for now)"
-        Solenoid_RID = raw_input(prompt)
+        print "What is Dataport DACN of your make up water solenoid? (Future application put 1 for now)"
+        Solenoid_DACN = raw_input(prompt)
 
         print "What is the modbus register address of your fertigator pump?"
         Fertigator_address = int(raw_input(prompt))
 
-        print "What is Dataport RID of your fertigator pump? (Future application put 1 for now)"
-        Fertigator_RID = raw_input(prompt)
+        print "What is Dataport DACN of your fertigator pump? (Future application put 1 for now)"
+        Fertigator_DACN = raw_input(prompt)
 
         print "What is the modbus register address of your Pump?"
         Pump_address = int(raw_input(prompt))
 
-        print "What is Dataport RID of your Pump? (Future application put 1 for now)"
-        Pump_RID = raw_input(prompt)
+        print "What is Dataport DACN of your Pump? (Future application put 1 for now)"
+        Pump_DACN = raw_input(prompt)
 
         print "What is the modbus register address of your Fill Solenoid?"
         Fill_address = int(raw_input(prompt))
 
-        print "What is Dataport RID of your Fill Solenoid? (Future application put 1 for now)"
-        Fill_RID = raw_input(prompt)
+        print "What is Dataport DACN of your Fill Solenoid? (Future application put 1 for now)"
+        Fill_DACN = raw_input(prompt)
 
-        print "Is everything correct (y/n)? \n Solenoid_address = %r \n Solenoid_RID = %r \n Fertigator_address = %r \n Fertigator_RID = %r \n Pump_address = %r \n Pump_RID = %r \n Fill_address = %r \n Fill_RID = %r \n" % (Solenoid_address, Solenoid_RID, Fertigator_address, Fertigator_RID, Pump_address, Pump_RID, Fill_address, Fill_RID)
+        print "Is everything correct (y/n)? \n Solenoid_address = %r \n Solenoid_DACN = %r \n Fertigator_address = %r \n Fertigator_DACN = %r \n Pump_address = %r \n Pump_DACN = %r \n Fill_address = %r \n Fill_DACN = %r \n" % (Solenoid_address, Solenoid_DACN, Fertigator_address, Fertigator_DACN, Pump_address, Pump_DACN, Fill_address, Fill_DACN)
         
         if raw_input(prompt) == 'y':
             with con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO Outputs(Alias, Address, RID) VALUES ('Solenoid', ?, ?);", (Solenoid_address, Solenoid_RID, ))
-                cur.execute("INSERT INTO Outputs(Alias, Address, RID) VALUES ('Fertigator', ?, ?);", (Fertigator_address, Fertigator_RID, ))
-                cur.execute("INSERT INTO Outputs(Alias, Address, RID) VALUES ('Pump', ?, ?);", (Pump_address, Pump_RID, ))
-                cur.execute("INSERT INTO Outputs(Alias, Address, RID) VALUES ('Fill', ?, ?);", (Fill_address, Fill_RID, ))
-            Setup_logger.info(" Output table updated with: \n Solenoid_address = %r \n Solenoid_RID = %r \n Fertigator_address = %r \n Fertigator_RID = %r \n Pump_address = %r \n Pump_RID = %r \n Fill_address = %r \n Fill_RID = %r \n" % (Solenoid_address, Solenoid_RID, Fertigator_address, Fertigator_RID, Pump_address, Pump_RID, Fill_address, Fill_RID))
+                cur.execute("INSERT INTO Outputs(Alias, Address, DACN) VALUES ('Solenoid', ?, ?);", (Solenoid_address, Solenoid_DACN, ))
+                cur.execute("INSERT INTO Outputs(Alias, Address, DACN) VALUES ('Fertigator', ?, ?);", (Fertigator_address, Fertigator_DACN, ))
+                cur.execute("INSERT INTO Outputs(Alias, Address, DACN) VALUES ('Pump', ?, ?);", (Pump_address, Pump_DACN, ))
+                cur.execute("INSERT INTO Outputs(Alias, Address, DACN) VALUES ('Fill', ?, ?);", (Fill_address, Fill_DACN, ))
+            Setup_logger.info(" Output table updated with: \n Solenoid_address = %r \n Solenoid_DACN = %r \n Fertigator_address = %r \n Fertigator_DACN = %r \n Pump_address = %r \n Pump_DACN = %r \n Fill_address = %r \n Fill_DACN = %r \n" % (Solenoid_address, Solenoid_DACN, Fertigator_address, Fertigator_DACN, Pump_address, Pump_DACN, Fill_address, Fill_DACN))
             break
         print "Let's try again."
 
@@ -359,8 +359,8 @@ def Startup():
 		cur = con.cursor()
 		cur.execute("CREATE TABLE IF NOT EXISTS Modbus(Id INTEGER PRIMARY KEY, Name TEXT, Value INT)")
 		cur.execute("CREATE TABLE IF NOT EXISTS Gateway(Id INTEGER PRIMARY KEY, Name TEXT, Value TEXT)")
-		cur.execute("CREATE TABLE IF NOT EXISTS Sensors(Id INTEGER PRIMARY KEY, Alias TEXT, Address INT, RID TEXT, Slope REAL, Intercept REAL)")
-		cur.execute("CREATE TABLE IF NOT EXISTS Outputs(Id INTEGER PRIMARY KEY, Alias TEXT, Address INT, RID TEXT)")
+		cur.execute("CREATE TABLE IF NOT EXISTS Sensors(Id INTEGER PRIMARY KEY, Alias TEXT, Address INT, DACN INT, Slope REAL, Intercept REAL)")
+		cur.execute("CREATE TABLE IF NOT EXISTS Outputs(Id INTEGER PRIMARY KEY, Alias TEXT, Address INT, DACN INT)")
 		cur.execute("CREATE TABLE IF NOT EXISTS Timers(Id INTEGER PRIMARY KEY, Name TEXT, Length REAL)")
         cur.execute("CREATE TABLE IF NOT EXISTS Setpoints(Id INTEGER PRIMARY KEY, Name TEXT, Value REAL)")
 
