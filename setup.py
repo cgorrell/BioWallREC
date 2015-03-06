@@ -85,8 +85,8 @@ def Gateway_config():
             with con:
                 cur = con.cursor()
                 cur.execute("INSERT INTO Gateway(Name, Value) VALUES ('Device_alias', ?);", (Device_alias, ))
-                cur.execute("INSERT INTO Gateway(Name, Value) VALUES ('Portal_cik', ?);", ('658c93cb7276b6f999c3de95f3c284e9049a6ce0', ))
-                cur.execute("INSERT INTO Gateway(Name, Value) VALUES ('Vendor_token', ?);", ('96e2de6a3b2c545de63d15080a91b25ed46a3e92', ))
+                cur.execute("INSERT INTO Gateway(Name, Value) VALUES ('Portal_cik', ?);", ('YOUR CIK HERE', ))
+                cur.execute("INSERT INTO Gateway(Name, Value) VALUES ('Vendor_token', ?);", ('YOUR TOKEN HERE', ))
                 cur.execute("INSERT INTO Gateway(Name, Value) VALUES ('Vendor_name', ?);", ('furbish', ))
                 cur.execute("INSERT INTO Gateway(Name, Value) VALUES ('Model', ?);", ('BioWallREC', ))
             	cur.execute("INSERT INTO Gateway(Name, Value) VALUES ('Serial', ?);", (Serial_number, ))
